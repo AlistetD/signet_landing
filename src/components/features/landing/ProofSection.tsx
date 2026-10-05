@@ -22,10 +22,9 @@ export function ProofSection() {
             <span className="text-signet-red">/5</span>
           </span>
         </p>
-        <blockquote className="mt-[clamp(1.25rem,3.5vh,2.5rem)] max-w-2xl">
-          <p className="type-quote leading-relaxed">«{proof.quote}»</p>
-          <footer className="mt-3 text-sm text-muted md:mt-4">— {proof.cite}</footer>
-        </blockquote>
+        <p className="type-quote mt-[clamp(1.25rem,3.5vh,2.5rem)] max-w-2xl leading-relaxed text-muted">
+          {proof.quote}
+        </p>
       </GlassPanel>
     </section>
   )

@@ -4,11 +4,12 @@ Landing copy lives in `src/content/landing.ts`. Do not duplicate it here.
 
 ## Sourced
 
-- Marketing TZ (2026-09-22): hero lead, proof rating/quote, unified form, FAQ, footer
+- Marketing TZ (2026-09-22): hero lead, proof rating, unified form, FAQ, footer
 - Hero headline, proof survey intro, FAQ salary item: owner copy 2026-10-05 (why-us section removed; salary merged into `faq.items`)
-- How-it-works path: owner copy 2026-09-30
+- Proof note under rating, path title «Как к нам попасть», HR phone `+375 44 525-43-75`: owner copy 2026-10-05
+- How-it-works path steps: owner copy 2026-09-30
 - Brand HEX
-- Public contacts from signet.by: `662-13-13`, `shop@sigaretnet.by`
+- Public contacts: `+375 44 525-43-75`, `shop@sigaretnet.by`
 - Legal entity on the footer: ООО «БелВэйп»
 - PDN policy body: `src/content/privacy-policy.ts` (owner legal text 2026-10-05). Site name placeholder is `siteLabel` until the production URL is known.
 - City select: official 24 store cities in `src/lib/cities.ts` (added Слоним; dropped Кобрин and Волковыск)

@@ -25,7 +25,7 @@ Chat with the user is Russian. Every file under `DOCS/` is English.
 | City select | `src/components/features/apply/CitySelect.tsx` | Themed glass city picker |
 | Privacy policy | `src/content/privacy-policy.ts` | Structured PDN policy body |
 | Privacy dialog | `src/components/features/landing/PrivacyPolicyDialog.tsx` | Overlay for consent + footer |
-| How it works | `src/components/features/landing/HowItWorksSection.tsx` | Three-station path above `#form` |
+| How it works | `src/components/features/landing/HowItWorksSection.tsx` | Three-station path «Как к нам попасть» above `#form` |
 | Disclosures | `src/components/features/landing/LandingDisclosureList.tsx` | Glass `<details>` rows for `#faq` |
 | Theme | `src/stores/theme.tsx` | Light / dark, `localStorage` |
 | Plasma background | `src/components/features/landing/PlasmaBackground.tsx` | React Bits Plasma |

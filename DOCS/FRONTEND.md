@@ -6,8 +6,8 @@ Single-page Landing. React 19, Vite, TypeScript strict, Tailwind 4, TanStack Rou
 
 1. Sticky glass header: SigNet mark, theme toggle, CTA «Откликнуться» → `#form`
 2. Hero: «Улучшаем качество жизни с любимой привычкой» (content-sized with a height cap on phone, 16:9 on desktop) over Plasma
-3. Social proof: 4,54/5, survey intro paragraph, and a quote in a glass cell
-4. How it works: three-station path (Заявка → Звонок → Знакомство и первые шаги) in a glass cell immediately above the form
+3. Social proof: 4,54/5, survey intro, and a note under the rating (not a named quote)
+4. How to join: three-station path «Как к нам попасть» (Заявка → Звонок → Знакомство и первые шаги) in a glass cell immediately above the form
 5. Apply form `#form` (one set of fields, no store / office tabs)
 6. Inline thank-you after submit (title and body only; no messenger CTA)
 7. FAQ accordion `#faq` (salary, experience, schedule, fines) via `LandingDisclosureList`
@@ -32,7 +32,7 @@ Single-page Landing. React 19, Vite, TypeScript strict, Tailwind 4, TanStack Rou
 ## Rules
 
 - Tokens live in `src/styles.css` `@theme`. Semantic `page` / `fg` / `muted` swap with `html.dark`. Display font is Libre Franklin ExtraBold until Muller files arrive.
-- Theme: `ThemeProvider` (`src/stores/theme.tsx`). Class `dark` on `<html>`, `color-scheme` synced, preference in `localStorage` (`signet-theme`). First visit follows `prefers-color-scheme`. Blocking script in `index.html` avoids a flash.
+- Theme: `ThemeProvider` (`src/stores/theme.tsx`). Class `dark` on `<html>`, `color-scheme` synced. First visit (no `signet-theme` in `localStorage`) follows `prefers-color-scheme` and keeps listening until the Candidate toggles in the header; then the choice is stored. Blocking script in `index.html` avoids a flash; if storage throws, it still uses the system scheme.
 - Light theme is its own surface: warm `#F2F2F2`, dense light glass, Plasma as gray steam (`lightMode`). Wordmark is two knockouts of `public/brand/wordmark.png` (no black plate): light has black `sig` / `team`, both keep the red `net.` block. They sit stacked and swap via `html.dark` so the plate cannot flash. Hero type has no glow on light; dark keeps a black text-shadow. Dark theme keeps black glass and red Plasma. Primary CTAs stay Signet red with white type in both.
 - Chrome, cards, form, footer, FAQ disclosures, and how-it-works sit on dense liquid glass so body copy stays readable.
 - Form talks only to relative `/api`. Vite proxies `/api` to Hono on localhost.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PLASMA_TINT, resolveTheme } from './theme'
+import { isStoredTheme, PLASMA_TINT, resolveTheme } from './theme'
 
 describe('resolveTheme', () => {
   it('uses a stored light preference', () => {
@@ -13,6 +13,15 @@ describe('resolveTheme', () => {
   it('follows the system when nothing is stored', () => {
     expect(resolveTheme(null, true)).toBe('dark')
     expect(resolveTheme(null, false)).toBe('light')
+  })
+})
+
+describe('isStoredTheme', () => {
+  it('accepts only explicit light or dark', () => {
+    expect(isStoredTheme('light')).toBe(true)
+    expect(isStoredTheme('dark')).toBe(true)
+    expect(isStoredTheme(null)).toBe(false)
+    expect(isStoredTheme('system')).toBe(false)
   })
 })
 

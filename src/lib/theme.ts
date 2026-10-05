@@ -8,8 +8,12 @@ export const PLASMA_TINT: Record<Theme, string> = {
   dark: '#e60000',
 }
 
+export function isStoredTheme(stored: string | null): stored is Theme {
+  return stored === 'light' || stored === 'dark'
+}
+
 export function resolveTheme(stored: string | null, prefersDark: boolean): Theme {
-  if (stored === 'light' || stored === 'dark') {
+  if (isStoredTheme(stored)) {
     return stored
   }
   return prefersDark ? 'dark' : 'light'
