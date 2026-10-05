@@ -1,0 +1,15 @@
+---
+description: Navigate the repo via DOCS/INDEX.md. Keep the map, glossary, and ADRs in sync with code.
+alwaysApply: true
+---
+
+# Documentation map
+
+Start every task by reading `DOCS/INDEX.md`. Then open only the linked doc for the area you will change.
+
+- Talk to the user in Russian. Write all project docs and code comments in English.
+- Single map: `DOCS/INDEX.md`. Update it in the same change when folders or public interfaces move.
+- Domain language lives in `DOCS/GLOSSARY.md` (this repo's CONTEXT.md). Update a term the turn it is resolved.
+- Record hard-to-reverse trade-offs in `DOCS/DECISIONS/` (`0001-slug.md`). Skip ADRs that are easy to reverse.
+- Do not paste file trees, npm scripts, or types that already exist in the repo. Point to the file instead.
+- After a public interface, apply-flow, or folder change: update the matching `DOCS/*.md` before calling the task done.

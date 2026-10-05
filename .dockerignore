@@ -1,0 +1,10 @@
+node_modules
+.git
+data
+e2e
+playwright-report
+test-results
+DOCS
+.agents
+.cursor
+*.md
