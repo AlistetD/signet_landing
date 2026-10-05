@@ -70,6 +70,7 @@ export const landingContent = {
       resumeUrl: { label: 'Ссылка на резюме (если есть)', placeholder: 'https://' },
     },
     consent: 'Согласен на обработку персональных данных',
+    consentAck: 'Ознакомлен',
     submit: 'Отправить анкету',
     reassurance: 'Позвоним в течение 1–2 рабочих дней. Никакого спама — только по делу.',
     successTitle: 'Спасибо! Заявка принята',
@@ -114,5 +115,8 @@ export const landingContent = {
     phoneLabel: '662-13-13',
     phoneHref: 'tel:+375296621313',
     email: 'shop@sigaretnet.by',
+    privacyLink: 'Политика в отношении обработки персональных данных',
+    privacyClose: 'Закрыть',
+    privacyCloseAria: 'Закрыть политику обработки персональных данных',
   },
 } as const

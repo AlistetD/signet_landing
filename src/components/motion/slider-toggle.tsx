@@ -3,11 +3,12 @@ import { cn } from '@/lib/cn'
 type SliderToggleProps = {
   checked: boolean
   onChange: (next: boolean) => void
+  onRequestEnable?: () => void
   label: string
   id: string
 }
 
-export function SliderToggle({ checked, onChange, label, id }: SliderToggleProps) {
+export function SliderToggle({ checked, onChange, onRequestEnable, label, id }: SliderToggleProps) {
   return (
     <div className="flex min-h-11 items-center gap-3">
       <button
@@ -16,7 +17,13 @@ export function SliderToggle({ checked, onChange, label, id }: SliderToggleProps
         role="switch"
         aria-checked={checked}
         aria-label={label}
-        onClick={() => onChange(!checked)}
+        onClick={() => {
+          if (!checked && onRequestEnable) {
+            onRequestEnable()
+            return
+          }
+          onChange(!checked)
+        }}
         className={cn(
           'relative h-7 w-12 shrink-0 rounded-full transition-colors',
           checked ? 'bg-signet-red' : 'bg-fg/20',

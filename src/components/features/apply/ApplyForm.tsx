@@ -1,10 +1,12 @@
 import { useForm } from '@tanstack/react-form'
 import { useState, type ReactNode } from 'react'
 import { postApplication } from '@/api/client'
+import { usePrivacyPolicy } from '@/components/features/landing/PrivacyPolicyProvider'
 import { SliderToggle } from '@/components/motion/slider-toggle'
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar'
 import { fireSignetConfetti } from '@/components/ui/confetti'
 import { ShineBorder } from '@/components/ui/shine-border'
+import { CitySelect } from '@/components/features/apply/CitySelect'
 import { citySuggestions, landingContent } from '@/content/landing'
 import {
   applicationSchema,
@@ -23,6 +25,7 @@ export function ApplyForm() {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const { theme } = useTheme()
+  const { openPrivacyPolicy } = usePrivacyPolicy()
 
   const form = useForm({
     defaultValues: {
@@ -158,21 +161,16 @@ export function ApplyForm() {
                         label={copy.fields.city.label}
                         error={field.state.meta.isTouched && field.state.value.length < 2 ? copy.errors.city : null}
                       >
-                        <select
+                        <CitySelect
                           id="apply-city"
                           name="city"
                           className={inputClass}
                           value={field.state.value}
+                          options={citySuggestions}
+                          placeholder={copy.errors.city}
                           onBlur={field.handleBlur}
-                          onChange={(event) => field.handleChange(event.target.value)}
-                        >
-                          <option value="">{copy.errors.city}</option>
-                          {citySuggestions.map((city) => (
-                            <option key={city} value={city}>
-                              {city}
-                            </option>
-                          ))}
-                        </select>
+                          onChange={field.handleChange}
+                        />
                       </Field>
                     )}
                   </form.Field>
@@ -232,6 +230,9 @@ export function ApplyForm() {
                         id="apply-consent"
                         checked={field.state.value}
                         onChange={field.handleChange}
+                        onRequestEnable={() => {
+                          openPrivacyPolicy('consent', () => field.handleChange(true))
+                        }}
                         label={copy.consent}
                       />
                     )}

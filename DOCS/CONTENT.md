@@ -10,6 +10,7 @@ Landing copy lives in `src/content/landing.ts`. Do not duplicate it here.
 - Brand HEX
 - Public contacts from signet.by: `662-13-13`, `shop@sigaretnet.by`
 - Legal entity on the footer: ООО «БелВэйп»
+- PDN policy body: `src/content/privacy-policy.ts` (owner legal text 2026-10-05). Site name placeholder is `siteLabel` until the production URL is known.
 - City select: official 24 store cities in `src/lib/cities.ts` (added Слоним; dropped Кобрин and Волковыск)
 
 ## Still waiting

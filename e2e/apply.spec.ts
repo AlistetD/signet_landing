@@ -13,12 +13,15 @@ test('candidate can submit the apply form', async ({ page }) => {
 
   await page.getByLabel('Имя').fill('Анна Ковалева')
   await page.getByLabel('Телефон').fill(localPhone)
-  await page.getByLabel('Город').selectOption('Минск')
+  await page.getByLabel('Город').click()
+  await page.getByRole('option', { name: 'Минск' }).click()
   await page.getByLabel('Желаемая позиция').fill('Продавец-консультант')
 
   await expect(page.getByRole('img', { name: '100%' })).toBeVisible()
 
   await page.getByRole('switch', { name: 'Согласен на обработку персональных данных' }).click()
+  await expect(page.getByRole('dialog', { name: 'Политика в отношении обработки персональных данных' })).toBeVisible()
+  await page.getByRole('button', { name: 'Ознакомлен' }).click()
   await page.getByRole('button', { name: 'Отправить анкету' }).click()
 
   await expect(page.getByText('Заявка принята')).toBeVisible()
@@ -43,4 +46,19 @@ test('candidate can submit the apply form', async ({ page }) => {
       }
     })
     .toBe(true)
+})
+
+test('footer privacy link opens the policy without granting consent', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'domcontentloaded' })
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 15_000 })
+
+  await page.getByRole('button', { name: 'Политика в отношении обработки персональных данных' }).click()
+  const dialog = page.getByRole('dialog', { name: 'Политика в отношении обработки персональных данных' })
+  await expect(dialog).toBeVisible()
+  await expect(dialog.getByRole('button', { name: 'Закрыть', exact: true })).toBeVisible()
+  await expect(dialog.getByRole('button', { name: 'Ознакомлен' })).toHaveCount(0)
+  await expect(page.getByRole('switch', { name: 'Согласен на обработку персональных данных' })).toHaveAttribute(
+    'aria-checked',
+    'false',
+  )
 })

@@ -5,6 +5,7 @@ import { HeroSection } from '@/components/features/landing/HeroSection'
 import { HowItWorksSection } from '@/components/features/landing/HowItWorksSection'
 import { JobPostingJsonLd } from '@/components/features/landing/JobPostingJsonLd'
 import { PlasmaBackground } from '@/components/features/landing/PlasmaBackground'
+import { PrivacyPolicyProvider } from '@/components/features/landing/PrivacyPolicyProvider'
 import { ProofSection } from '@/components/features/landing/ProofSection'
 import { SiteFooter } from '@/components/features/landing/SiteFooter'
 import { SiteHeader } from '@/components/features/landing/SiteHeader'
@@ -30,7 +31,7 @@ function HomeError({ error }: ErrorComponentProps) {
 
 function HomePage() {
   return (
-    <>
+    <PrivacyPolicyProvider>
       <PlasmaBackground />
       <JobPostingJsonLd />
       <SiteHeader />
@@ -44,6 +45,6 @@ function HomePage() {
         <FaqSection />
       </main>
       <SiteFooter />
-    </>
+    </PrivacyPolicyProvider>
   )
 }

@@ -1,9 +1,11 @@
+import { usePrivacyPolicy } from '@/components/features/landing/PrivacyPolicyProvider'
 import { BrandWordmark } from '@/components/ui/brand-wordmark'
 import { landingContent } from '@/content/landing'
 
 export function SiteFooter() {
   const footer = landingContent.footer
   const year = new Date().getFullYear()
+  const { openPrivacyPolicy } = usePrivacyPolicy()
 
   return (
     <footer className="glass mt-[clamp(1rem,3vh,2rem)] rounded-none pb-[var(--safe-bottom)]">
@@ -30,6 +32,13 @@ export function SiteFooter() {
           >
             {footer.email}
           </a>
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center text-left font-semibold text-fg underline-offset-4 fine-hover:underline"
+            onClick={() => openPrivacyPolicy('read')}
+          >
+            {footer.privacyLink}
+          </button>
         </div>
       </div>
     </footer>

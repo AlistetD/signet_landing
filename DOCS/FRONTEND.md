@@ -11,7 +11,8 @@ Single-page Landing. React 19, Vite, TypeScript strict, Tailwind 4, TanStack Rou
 5. Apply form `#form` (one set of fields, no store / office tabs)
 6. Inline thank-you after submit (title and body only; no messenger CTA)
 7. FAQ accordion `#faq` (salary, experience, schedule, fines) via `LandingDisclosureList`
-8. Footer: mark, © year, ООО «БелВэйп», HR phone and email
+8. Footer: mark, © year, ООО «БелВэйп», HR phone and email, privacy-policy link
+9. Privacy policy modal: first PDN toggle on opens it; «Ознакомлен» sets consent. Footer link opens the same dialog in read mode.
 
 ## Animations (one job each)
 
@@ -40,5 +41,7 @@ Single-page Landing. React 19, Vite, TypeScript strict, Tailwind 4, TanStack Rou
 - Hero ExtraBold caps use modest tracking (`0.02em`) and `leading-[1.25]` so the Й breve does not collide with the line above. Copy sits inset toward the middle, still left-aligned.
 - Type, gutters, and section padding scale with **both** viewport width and height. Tokens live on `:root` in `src/styles.css` (`--type-hero`, `--type-title`, `--type-card`, `--type-lead`, `--type-quote`, `--type-rating`, `--gutter`, `--section-y`, `--header-h`). Short viewports (`max-height: 740px` / `560px`) shrink the hero and section rhythm so the first screen still fits. Classes: `type-*`, `page-gutter`, `section-y`, `scroll-anchor`.
 - Phone layout: FAQ uses stacked glass `<details>` rows (`max-w-3xl`), 16px inputs (no iOS zoom), 44px tap targets, content-sized hero with a height cap (16:9 on desktop), `env(safe-area-inset-*)` on header and footer, `viewport-fit=cover`. Wordmark is desktop-only in the header so the CTA stays tappable. Hover brightness stays behind `(hover: hover) and (pointer: fine)`.
+- Privacy policy is a `z-[60]` glass dialog above the sticky header. One inner scroll, sticky title and action, safe-area padding. Turning the PDN toggle on is gated until «Ознакомлен». Closing without that button leaves consent off. Footer opens the same dialog without changing the form.
+- City field is a custom glass dialog (`CitySelect`), not a native `<select>`, so the option list uses theme tokens (`fg` / `field` / glass) in both light and dark. The list is portaled to `document.body` so the form’s `overflow-hidden` cannot clip it.
 - How-it-works is a red path: vertical spine on the phone, horizontal spine from `md`. Station icons are Lucide, not emoji. `prefers-reduced-motion: reduce` skips the spine grow.
 - Team gallery code stays in `TeamSection` / `landingContent.team` / `public/team/` but is not mounted on the Landing.
