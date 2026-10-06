@@ -24,7 +24,7 @@ Single-page Landing. React 19, Vite, TypeScript strict, Tailwind 4, TanStack Rou
 | Confetti | Successful submit only (`#ed1c24` + `#ffffff`) |
 | Slider toggle | PDN consent, not theme |
 | Theme toggle | Header. Sun/moon. Not the PDN slider |
-| Plasma | React Bits Plasma: `#e60000` on dark, cool gray `#6a6e74` steam on light (`lightMode`) |
+| Plasma | React Bits Plasma at 60 fps: `#e60000` on dark, cool gray `#6a6e74` steam on light (`lightMode`). Cursor warp is lerped in buffer space. |
 | Path spine | How-it-works rail grows once on load. Off when `prefers-reduced-motion: reduce`. |
 
 `prefers-reduced-motion: reduce` disables shine, CTA shimmer, confetti, the plasma loop, and CTA press scale. The form still submits.

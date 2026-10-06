@@ -17,6 +17,7 @@ export function PlasmaBackground() {
         speed={0.5}
         renderScale={0.7}
         maxDpr={2}
+        targetFps={60}
         mouseInteractive
         lightMode={light}
       />

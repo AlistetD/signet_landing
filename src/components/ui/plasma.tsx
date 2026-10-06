@@ -201,14 +201,21 @@ export function Plasma({
     const mesh = new Mesh(gl, { geometry, program })
 
     let pendingMouse: { x: number; y: number } | null = null
+    const mouse = { x: 0, y: 0 }
+    const mouseTarget = { x: 0, y: 0 }
+    let mouseInitialized = false
+    const mouseFollow = 7
     const onPointerMove = (event: PointerEvent) => {
       if (!mouseInteractive) {
         return
       }
       const rect = container.getBoundingClientRect()
+      if (rect.width === 0 || rect.height === 0) {
+        return
+      }
       pendingMouse = {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
+        x: ((event.clientX - rect.left) / rect.width) * gl.drawingBufferWidth,
+        y: (1 - (event.clientY - rect.top) / rect.height) * gl.drawingBufferHeight,
       }
     }
     window.addEventListener('pointermove', onPointerMove, { passive: true })
@@ -243,7 +250,7 @@ export function Plasma({
     let tabVisible = document.visibilityState !== 'hidden'
     const t0 = performance.now()
     const frameInterval = 1000 / targetFps
-    let lastFrameTime = 0
+    let lastFrameTime = t0
 
     const renderStaticFrame = () => {
       uniforms.iTime.value = 0
@@ -254,16 +261,31 @@ export function Plasma({
       if (contextLost || !isVisible || !tabVisible) {
         return
       }
-      if (t - lastFrameTime < frameInterval) {
+      const elapsed = t - lastFrameTime
+      if (elapsed < frameInterval) {
         raf = requestAnimationFrame(loop)
         return
       }
-      lastFrameTime = t
+      lastFrameTime = t - (elapsed % frameInterval)
 
       if (pendingMouse) {
-        uniforms.uMouse.value[0] = pendingMouse.x
-        uniforms.uMouse.value[1] = pendingMouse.y
+        mouseTarget.x = pendingMouse.x
+        mouseTarget.y = pendingMouse.y
         pendingMouse = null
+        if (!mouseInitialized) {
+          mouse.x = mouseTarget.x
+          mouse.y = mouseTarget.y
+          mouseInitialized = true
+        }
+      }
+
+      if (mouseInteractive && mouseInitialized) {
+        const dt = Math.min(elapsed, 100) / 1000
+        const blend = 1 - Math.exp(-mouseFollow * dt)
+        mouse.x += (mouseTarget.x - mouse.x) * blend
+        mouse.y += (mouseTarget.y - mouse.y) * blend
+        uniforms.uMouse.value[0] = mouse.x
+        uniforms.uMouse.value[1] = mouse.y
       }
 
       const timeValue = (t - t0) * 0.001
